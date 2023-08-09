@@ -1,5 +1,6 @@
 volumes:
   wp_vol:
+  db_vol:
 
 networks:
   my_network:
@@ -25,5 +26,16 @@ services:
     restart: on-failure
     volumes:
       - wp_vol:/var/www/html
+    networks:
+      - my_network
+
+
+  mariadb:
+    build: ./requirements/mariadb
+    ports:
+      - 3306:3306
+    restart: on-failure
+    volumes:
+      - db_vol:/var/lib/mysql
     networks:
       - my_network
