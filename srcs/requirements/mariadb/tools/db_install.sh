@@ -1,10 +1,11 @@
+
 service mysql start
+mysql -e "CREATE DATABASE IF NOT EXISTS wordpress_db ;"
+mysql -e "CREATE USER IF NOT EXISTS $MYSQL_USER@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;"
+mysql -e "GRANT ALL PRIVILEGES ON wordpress_db.* TO $MYSQL_USER@'%' ;"
 
-mysql -u root  -e "CREATE DATABASE wordpress_55;"
-mysql -u root  -e "USE wordpress_55;"
-mysql -u root  -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY 'PASSWORD';"
-mysql -u root  -e "GRANT ALL PRIVILEGES ON wordpress_55.* TO '$USER'@'localhost';"
+echo "wordpress database and user created succesfuly!"
 
-mysql -u root  -e "FLUSH PRIVILEGES;"
+service mysql stop
 
 mysqld_safe

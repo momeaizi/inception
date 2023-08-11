@@ -5,8 +5,9 @@ RUN apt-get --no-install-recommends update && \
 	
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-# COPY ./tools/db_install.sh /db_install.sh
+COPY ./tools/db_install.sh /db_install.sh
 
-# CMD ["bash", "/db_install.sh"]
 
-CMD ["mysqld_safe"]
+EXPOSE 3306
+
+CMD ["bash", "/db_install.sh"]
