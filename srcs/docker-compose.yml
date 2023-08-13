@@ -20,6 +20,8 @@ services:
 
 
   wordpress:
+    env_file:
+      - .env
     build: ./requirements/wordpress
     restart: on-failure
     depends_on:
@@ -28,24 +30,15 @@ services:
       - wp_vol:/var/www/html
     networks:
       - my_network
-    environment:
-      - MYSQL_USER
-      - MYSQL_PASSWORD
-      - WP_ADMIN_LOGIN
-      - WP_ADMIN_EMAIL
-      - WP_ADMIN_PASSWORD
-      - WP_AUTHOR_LOGIN
-      - WP_AUTHOR_EMAIL
-      - WP_AUTHOR_PASSWORD
+
 
 
   mariadb:
+    env_file:
+      - .env
     build: ./requirements/mariadb
     restart: on-failure
     volumes:
       - db_vol:/var/lib/mysql
     networks:
       - my_network
-    environment:
-      - MYSQL_USER
-      - MYSQL_PASSWORD
