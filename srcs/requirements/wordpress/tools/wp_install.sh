@@ -15,7 +15,7 @@ wget https://wordpress.org/latest.zip
 unzip latest.zip
 rm -f latest.zip
 
-#giving permission
+# giving permission
 chown -R www-data:www-data .
 
 
@@ -33,6 +33,11 @@ wp core install --url=localhost --title="Mohamed Taha Meaizi"  --admin_user=$WP_
 
 # create author user
 wp user create  $WP_AUTHOR_LOGIN $WP_AUTHOR_EMAIL    --role=author --user_pass=$WP_AUTHOR_PASSWORD  --allow-root
+
+
+
+
+wget https://www.Adminer.org/latest.php -O /var/www/html/wordpress/Adminer.php
 
 
 

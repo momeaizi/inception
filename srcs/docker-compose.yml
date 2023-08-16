@@ -42,3 +42,14 @@ services:
       - db_vol:/var/lib/mysql
     networks:
       - my_network
+
+    
+  adminer:
+    build: ./requirements/Adminer
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - mariadb
+    networks:
+      - my_network
