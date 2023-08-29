@@ -13,16 +13,8 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     unzip latest.zip
     rm -f latest.zip
 
-    # giving permission
+
     chown -R www-data:www-data .
-
-
-
-
-
-
-
-
 
 
     # connect wordpress to mariadb
@@ -32,19 +24,30 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
 
     # create admin user
-    wp core install --url=localhost --title="Mohamed Taha Meaizi"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
+    wp core install --url=localhost --title="Philosophy"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
 
     # create author user
     wp user create  $WP_AUTHOR_LOGIN $WP_AUTHOR_EMAIL    --role=author --user_pass=$WP_AUTHOR_PASSWORD  --allow-root
 
     # setup redis cache
-    wp plugin install redis-cache --activate --allow-root
-    wp plugin update --all --allow-root
+    wp config set WP_CACHE          true    --raw --allow-root
+    wp config set WP_REDIS_HOST     redis   --allow-root
+    wp config set WP_REDIS_PORT     6379    --raw --allow-root
 
-    wp config set WP_CACHE        true   --raw --allow-root
-    wp config set WP_REDIS_CLIENT predis --raw --allow-root
-    wp config set WP_REDIS_HOST   redis  --raw --allow-root
-    wp config set WP_REDIS_PORT   6379   --raw --allow-root
+
+    
+
+
+
+
+
+    wp plugin install redis-cache --activate --allow-root
+
+    wp redis enable --allow-root
+
+    cat wp-config.php
+
+
 fi
 
 mkdir -p /run/php/

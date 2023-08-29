@@ -8,4 +8,4 @@ RUN apt-get --no-install-recommends update && \
 
 EXPOSE 8080
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html/"]
+CMD ["php", "-S", "0.0.0.0:8080", "/var/www/html/adminer.php"]
