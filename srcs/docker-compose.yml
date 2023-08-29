@@ -10,7 +10,7 @@ services:
     container_name: nginx
     build: ./requirements/nginx
     ports:
-      - 443:443
+      - 8888:8888
     restart: on-failure
     depends_on:
       - wordpress
