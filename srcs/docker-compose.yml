@@ -10,7 +10,7 @@ services:
     container_name: nginx
     build: ./requirements/nginx
     ports:
-      - 8888:8888
+      - 443:443
     restart: on-failure
     depends_on:
       - wordpress
@@ -66,3 +66,18 @@ services:
     restart: on-failure
     networks:
       - my_network
+
+  portainer:
+    container_name: portainer
+    build:
+      context: ./requirements/portainer
+      args:
+        - PORTAINER_PASS=${PORTAINER_PASS:-def}
+    env_file : .env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - my_network
+    depends_on:
+      - wordpress
+    restart: always

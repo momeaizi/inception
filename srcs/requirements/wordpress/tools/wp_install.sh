@@ -42,6 +42,7 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
 
     wp plugin install redis-cache --activate --allow-root
+    wp plugin update --all --allow-root
 
     wp redis enable --allow-root
 
