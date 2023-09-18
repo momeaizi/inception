@@ -46,11 +46,12 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
     wp redis enable --allow-root
 
-    cat wp-config.php
-
 
 fi
 
+if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
+    exit 5
+fi
 mkdir -p /run/php/
 
 php-fpm7.3 -F
