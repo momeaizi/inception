@@ -24,7 +24,7 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
 
     # create admin user
-    wp core install --url=localhost --title="Philosophy"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
+    wp core install --url=momeaizi.42.fr --title="Philosophy"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
 
     # create author user
     wp user create  $WP_AUTHOR_LOGIN $WP_AUTHOR_EMAIL    --role=author --user_pass=$WP_AUTHOR_PASSWORD  --allow-root

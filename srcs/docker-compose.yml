@@ -67,17 +67,27 @@ services:
     networks:
       - my_network
 
-  portainer:
-    container_name: portainer
-    build:
-      context: ./requirements/portainer
-      args:
-        - PORTAINER_PASS=${PORTAINER_PASS:-def}
-    env_file : .env
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  containerization:
+    container_name: containerization
+    build: ./requirements/containerization
+    ports:
+      - 3000:3000
+    restart: on-failure
     networks:
       - my_network
-    depends_on:
-      - wordpress
-    restart: always
+
+
+  # portainer:
+  #   container_name: portainer
+  #   build:
+  #     context: ./requirements/portainer
+  #     args:
+  #       - PORTAINER_PASS=${PORTAINER_PASS:-def}
+  #   env_file : .env
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - my_network
+  #   depends_on:
+  #     - wordpress
+  #   restart: always
