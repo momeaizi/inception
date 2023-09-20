@@ -14,11 +14,11 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     rm -f latest.zip
 
 
-    chown -R www-data:www-data .
 
 
     # connect wordpress to mariadb
     cd /var/www/html/wordpress
+    chown -R www-data:www-data .
     wp config create --dbname=wordpress_db --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb --allow-root
 
 
@@ -30,21 +30,12 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wp user create  $WP_AUTHOR_LOGIN $WP_AUTHOR_EMAIL    --role=author --user_pass=$WP_AUTHOR_PASSWORD  --allow-root
 
     # setup redis cache
-    wp config set WP_CACHE          true    --raw --allow-root
-    wp config set WP_REDIS_HOST     redis   --allow-root
-    wp config set WP_REDIS_PORT     6379    --raw --allow-root
-
-
-    
-
-
-
-
-
-    wp plugin install redis-cache --activate --allow-root
-    wp plugin update --all --allow-root
-
-    wp redis enable --allow-root
+    wp config set WP_CACHE          true    --raw 	--allow-root
+    wp config set WP_REDIS_HOST     redis   		--allow-root
+    wp config set WP_REDIS_PORT     6379    --raw 	--allow-root
+    wp plugin install redis-cache   --activate 		--allow-root
+    wp redis enable 					--allow-root
+    wp plugin update --all 				--allow-root
 
 
 fi
