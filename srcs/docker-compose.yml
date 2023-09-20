@@ -56,6 +56,26 @@ services:
     restart: on-failure
     depends_on:
       - mariadb
+    volumes:
+      - wp_vol:/ftp
+    networks:
+      - my_network
+  
+  ftp:
+    container_name: ftp
+    build: ./requirements/ftp
+    env_file:
+      - .env
+    ports:
+      - 20:20
+      - 21:21
+      - 5000-5010:5000-5010
+
+    restart: on-failure
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_vol:/var/www/html
     networks:
       - my_network
 
