@@ -39,9 +39,6 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wp plugin update --all 				--allow-root
 
 
-
-    chown -R www-data:www-data /var/www/html/wordpress
-
 fi
 
 if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then

@@ -1,16 +1,22 @@
 #!/bin/bash
 
-mkdir -p /var/run/vsftpd/empty
 
-touch /etc/vsftpd.chroot_list
+if [ -f "/var/www/html/wordpress/wp-config.php" ]; then
 
-adduser --disabled-password --gecos "" $ftp_user
+	mkdir -p /var/run/vsftpd/empty
 
-echo "$ftp_user:$ftp_passwd" | chpasswd
+	touch /etc/vsftpd.chroot_list
 
-usermod -aG www-data $ftp_user
+	adduser --disabled-password --gecos "" $ftp_user
 
-echo $ftp_user >>  /etc/vsftpd.user_list
+	echo "$ftp_user:$ftp_passwd" | chpasswd
 
+	chown -R $ftp_user:$ftp_user /var/www/html/
 
-/usr/sbin/vsftpd
+	echo $ftp_user >>  /etc/vsftpd.user_list
+
+	/usr/sbin/vsftpd
+
+fi
+
+exit 5
