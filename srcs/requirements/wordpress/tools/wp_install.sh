@@ -16,15 +16,16 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
 
 
 
-    # connect wordpress to mariadb
     cd /var/www/html/wordpress
-    chown -R www-data:www-data .
+
+
+    # connect wordpress to mariadb
     wp config create --dbname=wordpress_db --dbuser=$MYSQL_USER --dbpass=$MYSQL_PASSWORD --dbhost=mariadb --allow-root
 
 
 
     # create admin user
-    wp core install --url=momeaizi.42.fr --title="Philosophy"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
+    wp core install --url=$DOMAIN_NAME --title="reddit"  --admin_user=$WP_ADMIN_LOGIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
 
     # create author user
     wp user create  $WP_AUTHOR_LOGIN $WP_AUTHOR_EMAIL    --role=author --user_pass=$WP_AUTHOR_PASSWORD  --allow-root
@@ -37,6 +38,9 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wp redis enable 					--allow-root
     wp plugin update --all 				--allow-root
 
+
+
+    chown -R www-data:www-data /var/www/html/wordpress
 
 fi
 

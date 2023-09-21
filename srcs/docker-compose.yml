@@ -50,7 +50,7 @@ services:
     
   adminer:
     container_name: adminer
-    build: ./requirements/Adminer
+    build: ./requirements/bonus/Adminer
     ports:
       - 8080:8080
     restart: on-failure
@@ -63,7 +63,7 @@ services:
   
   ftp:
     container_name: ftp
-    build: ./requirements/ftp
+    build: ./requirements/bonus/ftp
     env_file:
       - .env
     ports:
@@ -82,14 +82,16 @@ services:
 
   redis:
     container_name: redis
-    build: ./requirements/redis
+    build: ./requirements/bonus/redis
     restart: on-failure
+    volumes:
+      - db_vol:/var/lib/redis
     networks:
       - my_network
 
   containerization:
     container_name: containerization
-    build: ./requirements/containerization
+    build: ./requirements/bonus/containerization
     ports:
       - 3000:3000
     restart: on-failure
@@ -99,7 +101,7 @@ services:
 
   portainer:
     container_name: portainer
-    build: ./requirements/portainer
+    build: ./requirements/bonus/portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
