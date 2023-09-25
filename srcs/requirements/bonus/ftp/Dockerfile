@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 COPY ./tools/setup_ftp.sh /setup_ftp.sh
 
-COPY ./conf/vsftpd.conf /etc/vsftpd.conf
+COPY ./conf/vsftpd.conf /tmp/vsftpd.conf
 
 
 CMD ["bash", "/setup_ftp.sh"]

@@ -7,7 +7,4 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY ./tools/db_install.sh /db_install.sh
 
-
-EXPOSE 3306
-
 CMD ["bash", "/db_install.sh"]
