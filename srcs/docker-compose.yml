@@ -1,6 +1,24 @@
 volumes:
-  wp_vol:
-  db_vol:
+  wordpress_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/momeaizi/data/wordpress
+      o: bind
+
+  mariadb_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/momeaizi/data/mariadb
+      o: bind
+
+  redis_vol:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/momeaizi/data/redis
+      o: bind
 
 networks:
   my_network:
@@ -15,7 +33,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wp_vol:/var/www/html
+      - wordpress_vol:/var/www/html
     networks:
       - my_network
 
@@ -30,7 +48,7 @@ services:
       - mariadb
       - redis
     volumes:
-      - wp_vol:/var/www/html
+      - wordpress_vol:/var/www/html
     networks:
       - my_network
 
@@ -43,7 +61,7 @@ services:
     build: ./requirements/mariadb
     restart: on-failure
     volumes:
-      - db_vol:/var/lib/mysql
+      - mariadb_vol:/var/lib/mysql
     networks:
       - my_network
 
@@ -54,10 +72,6 @@ services:
     ports:
       - 8080:8080
     restart: on-failure
-    depends_on:
-      - mariadb
-    volumes:
-      - wp_vol:/ftp
     networks:
       - my_network
   
@@ -70,12 +84,11 @@ services:
       - 20:20
       - 21:21
       - 5000-5010:5000-5010
-
     restart: on-failure
     depends_on:
       - wordpress
     volumes:
-      - wp_vol:/var/www/html
+      - wordpress_vol:/var/www/html
     networks:
       - my_network
 
@@ -85,9 +98,10 @@ services:
     build: ./requirements/bonus/redis
     restart: on-failure
     volumes:
-      - db_vol:/var/lib/redis
+      - redis_vol:/var/lib/redis
     networks:
       - my_network
+
 
   containerization:
     container_name: containerization

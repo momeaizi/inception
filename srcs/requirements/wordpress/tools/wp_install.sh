@@ -38,7 +38,7 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wp redis enable 					--allow-root
     wp plugin update --all 				--allow-root
 
-
+    chwon -R nobody:nogroup .
 fi
 
 if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
