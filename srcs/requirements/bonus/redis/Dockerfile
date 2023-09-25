@@ -8,6 +8,4 @@ RUN apt-get -y update && \
     sed -i 's/bind 127.0.0.1/bind redis/' /etc/redis/redis.conf
 
 
-EXPOSE 6379
-
 CMD ["redis-server",  "--protected-mode", "no"]

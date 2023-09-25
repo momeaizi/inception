@@ -6,6 +6,4 @@ RUN apt-get --no-install-recommends update && \
     wget --no-check-certificate https://www.adminer.org/latest.php -O /var/www/html/adminer.php
 
 
-EXPOSE 8080
-
-CMD ["php", "-S", "0.0.0.0:8080", "/var/www/html/adminer.php"]
+CMD ["php", "-S", "adminer:8080", "/var/www/html/adminer.php"]
