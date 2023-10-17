@@ -26,6 +26,7 @@ networks:
 services:
   nginx:
     container_name: nginx
+    image: nginx:v1337.0
     build: ./requirements/nginx
     ports:
       - 443:443
@@ -40,6 +41,7 @@ services:
 
   wordpress:
     container_name: wordpress
+    image: wordpress:v1337.0
     env_file:
       - .env
     build: ./requirements/wordpress
@@ -56,6 +58,7 @@ services:
 
   mariadb:
     container_name: mariadb
+    image: mariadb:v1337.0
     env_file:
       - .env
     build: ./requirements/mariadb
@@ -68,6 +71,7 @@ services:
     
   adminer:
     container_name: adminer
+    image: adminer:v1337.0
     build: ./requirements/bonus/Adminer
     ports:
       - 8080:8080
@@ -77,6 +81,7 @@ services:
   
   ftp:
     container_name: ftp
+    image: ftp:v1337.0
     build: ./requirements/bonus/ftp
     env_file:
       - .env
@@ -95,6 +100,7 @@ services:
 
   redis:
     container_name: redis
+    image: redis:v1337.0
     build: ./requirements/bonus/redis
     restart: on-failure
     volumes:
@@ -105,6 +111,7 @@ services:
 
   containerization:
     container_name: containerization
+    image: containerization:v1337.0
     build: ./requirements/bonus/containerization
     ports:
       - 3000:3000
@@ -115,6 +122,7 @@ services:
 
   portainer:
     container_name: portainer
+    image: portainer:v1337.0
     build: ./requirements/bonus/portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
