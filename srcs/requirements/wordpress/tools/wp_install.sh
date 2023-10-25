@@ -38,6 +38,11 @@ if [ ! -f "/var/www/html/wordpress/wp-config.php" ]; then
     wp redis enable 					--allow-root
     wp plugin update --all 				--allow-root
 
+    # give the ownership of the wordpress directory to www-data
+    chown -R www-data:www-data .
+    # give the permissions to the group to enable both php-fpm and ftp to work with this directory
+    chmod -R 775 .
+
 
 fi
 

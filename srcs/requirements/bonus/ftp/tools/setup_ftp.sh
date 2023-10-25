@@ -11,9 +11,9 @@ if [ ! -f "/etc/vsftpd/vsftpd.conf.bak" ]; then
     # Add the FTP_USER, change his password and declare him as the owner of wordpress folder and all subfolders
     adduser --disabled-password --gecos "" $ftp_user
 	
-    echo "$ftp_user:$ftp_passwd" | chpasswd 
+    echo "$ftp_user:$ftp_passwd" | chpasswd
 
-    chown -R $ftp_user:$ftp_user /var/www/html/wordpress
+    usermod -aG www-data $ftp_user
 
     echo $ftp_user >> /etc/vsftpd.userlist
 
